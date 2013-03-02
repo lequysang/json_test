@@ -33,17 +33,18 @@
 }
 
 -(void) fetchJSONDataToArrayFromURL:(NSURL *)jsonURL{
-//    NSMutableArray *jsonArray = [[NSMutableArray alloc] init];
     NSError* dataError;
     NSData* data = [NSData dataWithContentsOfURL:jsonURL options:NSDataReadingMappedIfSafe error:&dataError];
-//    NSLog(@"data  %@",data);
     if (!dataError) {
         NSError* jsonError;
-        id json = [NSJSONSerialization JSONObjectWithData:data
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data
                                                              options:kNilOptions
                                                                error:&jsonError];
         if (!jsonError) {
-            NSLog(@"%@",json);
+            NSArray *productsArray = [json valueForKey:@"p"];
+            NSDictionary *product = [productsArray objectAtIndex:0];
+            NSString *product_id = [product valueForKey:@"category_id"];
+            NSLog(@"%@",product_id);
         }
         else {
             NSLog(@"ERROR: %@",jsonError);
@@ -51,7 +52,6 @@
     }else{
         NSLog(@"ERROR: %@",dataError);
     }
-//    return jsonArray;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
