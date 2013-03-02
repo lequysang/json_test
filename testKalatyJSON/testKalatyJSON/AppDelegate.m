@@ -7,11 +7,11 @@
 //
 
 #import "AppDelegate.h"
-#define kLatestKivaLoansURL [NSURL URLWithString: @"http://sabeelonet.com/Infomist/productDetail.json"] //1
+//#define kLatestKivaLoansURL [NSURL URLWithString: @"http://sabeelonet.com/Infomist/productDetail.json"] //1
+//
+//#define kLatestKivaLoansURL_Two [NSURL URLWithString: @"http://infomist.net/kalaty/complete_jason.php"] //2
 
-#define kLatestKivaLoansURL_Two [NSURL URLWithString: @"http://infomist.net/kalaty/complete_jason.php"] //2
-
-#define kLatestKivaLoansURL_Three [NSURL URLWithString: @"https://raw.github.com/lequysang/json_test/master/complete_jason.php"] //2
+#define kLatestKivaLoansURL [NSURL URLWithString: @"https://raw.github.com/lequysang/json_test/master/outCorrect2.json"] //2
 
 
 
@@ -24,17 +24,6 @@
     NSLog(@"ONE= OK LINK===============================================================");
     [self fetchJSONDataToArrayFromURL:kLatestKivaLoansURL];
     
-    
-// Fault in {} JSON format must put in {"key":[{},{}]"}
-
-    NSLog(@"TWO= Fault ==================================================================");
-
-    //Correct format:
-    [self fetchJSONDataToArrayFromURL:kLatestKivaLoansURL_Two];
-    NSLog(@"THIRD_OK===================================================================");
-    
-    [self fetchJSONDataToArrayFromURL:kLatestKivaLoansURL_Three];
-  
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
