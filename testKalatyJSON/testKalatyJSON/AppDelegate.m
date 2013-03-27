@@ -12,8 +12,9 @@
 //#define kLatestKivaLoansURL_Two [NSURL URLWithString: @"http://infomist.net/kalaty/complete_jason.php"] //2
 
 #define kLatestKivaLoansURL [NSURL URLWithString: @"https://raw.github.com/lequysang/json_test/master/outCorrect2.json"] //2
-#define kLatestKivaLoansURLTwo [NSURL URLWithString: @"https://raw.github.com/lequysang/json_test/master/outCorrect.json"] //2
+//#define kLatestKivaLoansURLTwo [NSURL URLWithString: @"https://raw.github.com/lequysang/json_test/master/outCorrect.json"] //2
 
+#define kLatestKivaLoansURLTwo [NSURL URLWithString: @"https://raw.github.com/lequysang/json_test/master/newTest.json"] //2
 
 #import "ViewController.h"
 
@@ -22,9 +23,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     NSLog(@"ONE= OK LINK===============================================================");
-    [self fetchJSONDataToArrayFromURL:kLatestKivaLoansURL];
+    [self fetchJSONDataToArrayFromURL:kLatestKivaLoansURLTwo];
     
-    [self fetchJSONDataToArrayFromURLTwo:kLatestKivaLoansURLTwo];
+//    [self fetchJSONDataToArrayFromURLTwo:kLatestKivaLoansURLTwo];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
@@ -43,10 +44,11 @@
                                                              options:kNilOptions
                                                                error:&jsonError];
         if (!jsonError) {
-            NSArray *productsArray = [json objectForKey:@"p"];
+            NSLog(@"%@",json);
+            NSArray *productsArray = [json objectForKey:@"Response"];
             NSDictionary *product = [productsArray objectAtIndex:0];
-            NSString *product_id = [product valueForKey:@"category_id"];
-            NSLog(@"%@",product_id);
+//            NSString *product_id = [product valueForKey:@"category_id"];
+            NSLog(@"%@",product);
         }
         else {
             NSLog(@"ERROR: %@",jsonError);
