@@ -12,7 +12,7 @@
 //#define kLatestKivaLoansURL_Two [NSURL URLWithString: @"http://infomist.net/kalaty/complete_jason.php"] //2
 
 #define kLatestKivaLoansURL [NSURL URLWithString: @"https://raw.github.com/lequysang/json_test/master/outCorrect2.json"] //2
-
+#define kLatestKivaLoansURLTwo [NSURL URLWithString: @"https://raw.github.com/lequysang/json_test/master/outCorrect.json"] //2
 
 
 #import "ViewController.h"
@@ -23,6 +23,8 @@
 {
     NSLog(@"ONE= OK LINK===============================================================");
     [self fetchJSONDataToArrayFromURL:kLatestKivaLoansURL];
+    
+    [self fetchJSONDataToArrayFromURLTwo:kLatestKivaLoansURLTwo];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
@@ -41,8 +43,30 @@
                                                              options:kNilOptions
                                                                error:&jsonError];
         if (!jsonError) {
-            NSArray *productsArray = [json valueForKey:@"p"];
+            NSArray *productsArray = [json objectForKey:@"p"];
             NSDictionary *product = [productsArray objectAtIndex:0];
+            NSString *product_id = [product valueForKey:@"category_id"];
+            NSLog(@"%@",product_id);
+        }
+        else {
+            NSLog(@"ERROR: %@",jsonError);
+        }
+    }else{
+        NSLog(@"ERROR: %@",dataError);
+    }
+}
+
+-(void) fetchJSONDataToArrayFromURLTwo:(NSURL *)jsonURL{
+    NSError* dataError;
+    NSData* data = [NSData dataWithContentsOfURL:jsonURL options:NSDataReadingMappedIfSafe error:&dataError];
+    if (!dataError) {
+        NSError* jsonError;
+        NSArray *json = [NSJSONSerialization JSONObjectWithData:data
+                                                             options:kNilOptions
+                                                               error:&jsonError];
+        if (!jsonError) {
+//            NSArray *productsArray = [json valueForKey:@"p"];
+            NSDictionary *product = [json objectAtIndex:0];
             NSString *product_id = [product valueForKey:@"category_id"];
             NSLog(@"%@",product_id);
         }
